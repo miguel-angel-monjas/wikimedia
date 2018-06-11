@@ -1,7 +1,8 @@
 #!/usr/bin/python
-# -*- coding: latin-1 -*-
+# -*- coding: utf-8 -*-
 
 import pywikibot as pb
+import re
 from hashlib import sha1
 from io import BytesIO
 
@@ -10,7 +11,6 @@ def is_commons_file (sha):
     commons_site = pb.Site("commons", "commons")
     result = False
     for page in pb.site.APISite.allimages(commons_site, sha1=sha) :
-        print (page)
         result = True
         break
     return result
@@ -27,6 +27,5 @@ def get_hash (file_path):
 
 def remove_tags(text):
     """Remove html tags from a string"""
-    import re
     clean = re.compile('<.*?>')
     return re.sub(clean, '', text)
